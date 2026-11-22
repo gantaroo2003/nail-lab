@@ -86,7 +86,7 @@ ul.l{margin:6px 0;padding-left:1.2em}
   <div class="topbar"><span class="tag">百均ネイル研究所</span><button class="back" id="xlBtn">文字を大きく</button></div>
   <h1>手を、きれいに<br>撮りましょう</h1>
   <p class="lead" style="text-align:center">画面のピンクの手に、自分の手を重ねるだけ。<br>写真は<b>この携帯の中だけ</b>で使います。</p>
-  <div class="card hidden" id="inapp" style="border:3px solid #e9a13b;background:#fff8e8"><b style="font-size:1.15rem">⚠️ このまま開くと、カメラが動きません</b><br>YouTubeなどの中の画面では、ライブカメラが使えません。<b>Safari（Androidは Chrome）で開き直して</b>ください。<button class="btn big" id="openSafari" style="background:#e9a13b">🧭 Safariで開く</button><button class="btn gray" id="copyUrl">🔗 このページのURLをコピー</button><p class="note" id="inappHelp">うまく開かない時は、右上（または下）の「…」→「Safariで開く」でも開けます。<br>開き直さずに進んでも、赤いボタンで携帯のカメラアプリが開いて撮れます。</p></div>
+  <div class="card hidden" id="inapp" style="border:3px solid #e9a13b;background:#fff8e8"><b style="font-size:1.15rem">⚠️ このままでは、ピンクの手に合わせて撮れません</b><br>YouTubeの中の画面では、カメラが動かないためです。<br>いまのままでも、赤い「撮る」ボタンで<b>カメラアプリが開いて撮れます</b>。<br>ピンクの手に合わせたいときは、<b>Safariで開き直し</b>てください。<ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>下の「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><button class="btn big js-copy" style="background:#e9a13b">🔗 ① URLをコピー</button><button class="btn gray js-open">🧭 Safariで直接開く（開かない時は上の手順で）</button></div>
   <div class="card">
     <b>どちらの手？</b>
     <div class="row hand-choice" style="margin-top:8px">
@@ -109,7 +109,7 @@ ul.l{margin:6px 0;padding-left:1.2em}
 <!-- ===== 2. 撮影 ===== -->
 <section class="screen" id="s-shoot">
   <div class="topbar"><button class="back" id="shootBack">← もどる</button><span class="tag" id="shootTag">左手</span></div>
-  <div class="card hidden" id="inapp2" style="border-color:#e9a13b;background:#fff8e8"><b>⚠️ いまの開き方では、ライブカメラが動かないことがあります</b><br>右上（または下）の「…」→<b>「Safariで開く」</b>（Androidは「Chromeで開く」）を押すと、ピンクの手に合わせて撮れます。<br>このまま進んでも、<b>赤いボタンでカメラアプリが開いて撮れます</b>。</div>
+  <div class="card hidden" id="inapp2" style="border:3px solid #e9a13b;background:#fff8e8"><b style="font-size:1.15rem">⚠️ このままでは、ピンクの手に合わせて撮れません</b><br>YouTubeの中の画面では、カメラが動かないためです。<br>いまのままでも、赤い「撮る」ボタンで<b>カメラアプリが開いて撮れます</b>。<br>ピンクの手に合わせたいときは、<b>Safariで開き直し</b>てください。<ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>下の「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><button class="btn big js-copy" style="background:#e9a13b">🔗 ① URLをコピー</button><button class="btn gray js-open">🧭 Safariで直接開く（開かない時は上の手順で）</button></div>
   <div class="steps" id="steps"></div>
   <h2 id="shootTitle">1枚目：真上・手全体</h2>
   <p id="shootDesc" class="lead"></p>
@@ -195,18 +195,18 @@ function show(id){
 /* YouTube・LINE・Instagram などの中のブラウザか */
 (function(){var u=navigator.userAgent||"";if(/YouTube|GSA\/|FBAN|FBAV|Line\/|Instagram|Twitter|MicroMessenger|; wv\)/i.test(u)||!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia))$("inapp").classList.remove("hidden");})();
 
-$("openSafari").onclick=function(){
+function openSafari(){
   var u=location.href,ua=navigator.userAgent||"";
   if(/Android/i.test(ua)){location.href="intent://"+u.replace(/^https?:\/\//,"")+"#Intent;scheme="+(u.indexOf("https")===0?"https":"http")+";package=com.android.chrome;end";}
   else{location.href="x-safari-"+u;}
-  setTimeout(function(){$("inappHelp").style.fontWeight="800";$("inappHelp").style.color="#c0392b";},1200);
-};
-$("copyUrl").onclick=function(){
-  var u=location.href,b=this;
-  function ok(){b.textContent="✓ コピーしました。Safariに貼り付けて開いてね";}
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt("このURLをコピーして、Safariで開いてね",u);});}
-  else window.prompt("このURLをコピーして、Safariで開いてね",u);
-};
+}
+function copyUrl(btn){
+  var u=location.href;
+  function ok(){var l=document.querySelectorAll(".js-copy");for(var i=0;i<l.length;i++)l[i].textContent="✓ コピーしました → 次は Safari を開く";}
+  function ng(){window.prompt("このURLをコピーして、Safariで開いてね",u);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,ng);}else ng();
+}
+(function(){var o=document.querySelectorAll(".js-open"),c=document.querySelectorAll(".js-copy"),i;for(i=0;i<o.length;i++)o[i].onclick=openSafari;for(i=0;i<c.length;i++)c[i].onclick=function(){copyUrl(this);};})();
 /* 文字サイズ */
 $("xlBtn").onclick=function(){var x=document.documentElement.classList.toggle("xl");this.textContent=x?"文字をふつうに":"文字を大きく";};
 
