@@ -82,7 +82,7 @@ ul.l{margin:6px 0;padding-left:1.2em}
 </style>
 </head>
 <body>
-<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.8　11/22 14:10 更新</div>
+<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.9　11/22 14:25 更新</div>
 
 <!-- ===== 1. はじめ ===== -->
 <section class="screen active" id="s-start">
@@ -556,14 +556,26 @@ function renderWidths(){
 /* 爪を描く */
 function rr(cx,x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.lineTo(x+w-r,y);cx.quadraticCurveTo(x+w,y,x+w,y+r);cx.lineTo(x+w,y+h-r*0.6);cx.quadraticCurveTo(x+w,y+h,x+w-r*0.6,y+h);cx.lineTo(x+r*0.6,y+h);cx.quadraticCurveTo(x,y+h,x,y+h-r*0.6);cx.lineTo(x,y+r);cx.quadraticCurveTo(x,y,x+r,y);cx.closePath();}
 function lum(hex){var h=hex.replace("#","");if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];var v=parseInt(h,16);return ((v>>16)*0.3+((v>>8)&255)*0.59+(v&255)*0.11);}
+/* 爪のかたち：根もと（下）は半円、先（上）はゆるい弧のスクエアオフ */
+function nailPath(cx,w,h){
+  var r=w/2,rt=w*0.16;
+  cx.beginPath();
+  cx.moveTo(-w/2,h/2-r);
+  cx.arc(0,h/2-r,r,Math.PI,0,true);
+  cx.lineTo(w/2,-h/2+rt);
+  cx.quadraticCurveTo(w/2,-h/2,w/2-rt,-h/2);
+  cx.quadraticCurveTo(0,-h/2-h*0.06,-w/2+rt,-h/2);
+  cx.quadraticCurveTo(-w/2,-h/2,-w/2,-h/2+rt);
+  cx.closePath();
+}
 function paintNail(cx,n,d,i){
   var col=d.colors[i%d.colors.length],w=n.w,h=n.h,g,L=lum(col),dk=L>190?0.35:1;
   cx.save();cx.translate(n.cx,n.cy);cx.rotate(n.a);
   /* 下に落ちる影（立体感） */
-  cx.shadowColor="rgba(50,25,25,.30)";cx.shadowBlur=w*.16;cx.shadowOffsetY=w*.04;
-  rr(cx,-w/2,-h/2,w,h,w*0.48);cx.fillStyle=col;cx.fill();
+  cx.shadowColor="rgba(50,25,25,.34)";cx.shadowBlur=w*.10;cx.shadowOffsetY=w*.03;
+  nailPath(cx,w,h);cx.fillStyle=col;cx.fill();
   cx.shadowColor="transparent";cx.shadowBlur=0;cx.shadowOffsetY=0;
-  rr(cx,-w/2,-h/2,w,h,w*0.48);cx.save();cx.clip();
+  nailPath(cx,w,h);cx.save();cx.clip();
   /* 色（不透明に近くして、肌と混ざらないようにする） */
   if(d.texture==="クローム"){g=cx.createLinearGradient(-w/2,-h/2,w/2,h/2);g.addColorStop(0,"#ffffff");g.addColorStop(.3,col);g.addColorStop(.55,shade(col,-45));g.addColorStop(.75,"#ffffff");g.addColorStop(1,col);}
   else if(d.texture==="マグネット"){g=cx.createLinearGradient(-w*.5,h*.45,w*.5,-h*.45);g.addColorStop(0,shade(col,-30));g.addColorStop(.32,shade(col,-8));g.addColorStop(.46,shade(col,60));g.addColorStop(.5,shade(col,105));g.addColorStop(.54,shade(col,55));g.addColorStop(.7,shade(col,-12));g.addColorStop(1,shade(col,-38));}
@@ -582,8 +594,8 @@ function paintNail(cx,n,d,i){
   cx.fillStyle="rgba(255,255,255,.55)";cx.fillRect(w*.24,-h*.32,w*.07,h*.5);
   cx.restore();
   /* ふち取り */
-  rr(cx,-w/2,-h/2,w,h,w*0.48);cx.lineWidth=Math.max(1.5,w*.035);cx.strokeStyle=shade(col,-55);cx.globalAlpha=.32;cx.stroke();cx.globalAlpha=1;
-  if(i===S.sel){rr(cx,-w/2-5,-h/2-5,w+10,h+10,w*0.55);cx.setLineDash([9,7]);cx.lineWidth=4;cx.strokeStyle="#ffffff";cx.stroke();cx.lineWidth=1.5;cx.strokeStyle="#222";cx.stroke();cx.setLineDash([]);}
+  nailPath(cx,w,h);cx.lineWidth=Math.max(1.5,w*.035);cx.strokeStyle=shade(col,-55);cx.globalAlpha=.32;cx.stroke();cx.globalAlpha=1;
+  if(i===S.sel){nailPath(cx,w+10,h+10);cx.setLineDash([9,7]);cx.lineWidth=4;cx.strokeStyle="#ffffff";cx.stroke();cx.lineWidth=1.5;cx.strokeStyle="#222";cx.stroke();cx.setLineDash([]);}
   cx.restore();
 }
 function shade(hex,amt){
@@ -593,6 +605,8 @@ function shade(hex,amt){
   return "rgb("+r+","+g+","+b+")";
 }
 var NAMES=["親指","人差し指","中指","薬指","小指"];
+/* 指ごとの幅・縦横比：親指は幅広で短く、中指は一番長く、小指は一番小さい */
+var FW=[1.18,0.97,1.04,0.98,0.84],FH=[1.1,1.3,1.4,1.32,1.25];
 function startPlace(){S.placing=true;S.taps=[];placeUI();renderTry();}
 function stopPlace(){S.placing=false;$("placeBox").classList.add("hidden");}
 function placeUI(){
@@ -609,8 +623,8 @@ function finishPlace(){
   var mx=(f[0].x+f[1].x+f[2].x+f[3].x)/4,my=(f[0].y+f[1].y+f[2].y+f[3].y)/4;
   var P={x:mx+nx*avg*6,y:my+ny*avg*6},list=[];
   for(i=0;i<5;i++){
-    var p=t[i],vx=p.x-P.x,vy=p.y-P.y,a=Math.atan2(vx,-vy),wi=w*(i===0?1.15:(i===4?0.88:1));
-    list.push({cx:p.x,cy:p.y,w:wi,h:wi*1.3,a:a,measured:true});
+    var p=t[i],vx=p.x-P.x,vy=p.y-P.y,a=Math.atan2(vx,-vy),wi=w*FW[i];
+    list.push({cx:p.x,cy:p.y,w:wi,h:wi*FH[i],a:a,measured:true});
   }
   S.nails=list;S.sel=0;stopPlace();renderTry();
 }
