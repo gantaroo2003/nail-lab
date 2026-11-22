@@ -82,7 +82,7 @@ ul.l{margin:6px 0;padding-left:1.2em}
 </style>
 </head>
 <body>
-<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.7　11/22 15:10 更新</div>
+<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.8　11/22 14:10 更新</div>
 
 <!-- ===== 1. はじめ ===== -->
 <section class="screen active" id="s-start">
@@ -555,33 +555,34 @@ function renderWidths(){
 
 /* 爪を描く */
 function rr(cx,x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.lineTo(x+w-r,y);cx.quadraticCurveTo(x+w,y,x+w,y+r);cx.lineTo(x+w,y+h-r*0.6);cx.quadraticCurveTo(x+w,y+h,x+w-r*0.6,y+h);cx.lineTo(x+r*0.6,y+h);cx.quadraticCurveTo(x,y+h,x,y+h-r*0.6);cx.lineTo(x,y+r);cx.quadraticCurveTo(x,y,x+r,y);cx.closePath();}
+function lum(hex){var h=hex.replace("#","");if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];var v=parseInt(h,16);return ((v>>16)*0.3+((v>>8)&255)*0.59+(v&255)*0.11);}
 function paintNail(cx,n,d,i){
-  var col=d.colors[i%d.colors.length],w=n.w,h=n.h*1.12,g;
+  var col=d.colors[i%d.colors.length],w=n.w,h=n.h,g,L=lum(col),dk=L>190?0.35:1;
   cx.save();cx.translate(n.cx,n.cy);cx.rotate(n.a);
   /* 下に落ちる影（立体感） */
-  cx.shadowColor="rgba(50,25,25,.40)";cx.shadowBlur=w*.22;cx.shadowOffsetY=w*.07;
+  cx.shadowColor="rgba(50,25,25,.30)";cx.shadowBlur=w*.16;cx.shadowOffsetY=w*.04;
   rr(cx,-w/2,-h/2,w,h,w*0.48);cx.fillStyle=col;cx.fill();
   cx.shadowColor="transparent";cx.shadowBlur=0;cx.shadowOffsetY=0;
   rr(cx,-w/2,-h/2,w,h,w*0.48);cx.save();cx.clip();
   /* 色（不透明に近くして、肌と混ざらないようにする） */
   if(d.texture==="クローム"){g=cx.createLinearGradient(-w/2,-h/2,w/2,h/2);g.addColorStop(0,"#ffffff");g.addColorStop(.3,col);g.addColorStop(.55,shade(col,-45));g.addColorStop(.75,"#ffffff");g.addColorStop(1,col);}
-  else if(d.texture==="マグネット"){g=cx.createLinearGradient(-w/2,0,w/2,0);g.addColorStop(0,shade(col,-45));g.addColorStop(.35,shade(col,10));g.addColorStop(.55,shade(col,70));g.addColorStop(.75,shade(col,5));g.addColorStop(1,shade(col,-50));}
-  else{g=cx.createLinearGradient(0,-h/2,0,h/2);g.addColorStop(0,shade(col,25));g.addColorStop(.6,col);g.addColorStop(1,shade(col,-22));}
+  else if(d.texture==="マグネット"){g=cx.createLinearGradient(-w*.5,h*.45,w*.5,-h*.45);g.addColorStop(0,shade(col,-30));g.addColorStop(.32,shade(col,-8));g.addColorStop(.46,shade(col,60));g.addColorStop(.5,shade(col,105));g.addColorStop(.54,shade(col,55));g.addColorStop(.7,shade(col,-12));g.addColorStop(1,shade(col,-38));}
+  else{g=cx.createLinearGradient(0,-h/2,0,h/2);g.addColorStop(0,shade(col,Math.round(18*dk+6)));g.addColorStop(.6,col);g.addColorStop(1,shade(col,-Math.round(22*dk)));}
   cx.fillStyle=g;cx.fillRect(-w/2,-h/2,w,h);
   if(d.pattern==="チェック"){cx.strokeStyle="rgba(255,255,255,.7)";cx.lineWidth=w*.09;for(var k=-2;k<=2;k++){cx.beginPath();cx.moveTo(k*w*.28,-h/2);cx.lineTo(k*w*.28,h/2);cx.stroke();cx.beginPath();cx.moveTo(-w/2,k*h*.22);cx.lineTo(w/2,k*h*.22);cx.stroke();}}
   if(d.pattern==="ドット"){cx.fillStyle="rgba(255,255,255,.85)";for(var a=0;a<5;a++){cx.beginPath();cx.arc(((a*37)%100/100-.5)*w*.7,((a*53)%100/100-.5)*h*.7,w*.08,0,6.3);cx.fill();}}
   if(d.pattern==="ヒョウ柄"){cx.fillStyle="rgba(90,50,40,.75)";for(var b=0;b<5;b++){cx.beginPath();cx.ellipse(((b*41)%100/100-.5)*w*.7,((b*59)%100/100-.5)*h*.7,w*.1,w*.06,b,0,6.3);cx.fill();}}
   /* ふちを少し暗く（丸みの立体感） */
-  var rg=cx.createRadialGradient(0,-h*.05,w*.18,0,-h*.05,w*.78);rg.addColorStop(0,"rgba(0,0,0,0)");rg.addColorStop(1,"rgba(0,0,0,.30)");cx.fillStyle=rg;cx.fillRect(-w/2,-h/2,w,h);
+  var rg=cx.createRadialGradient(0,-h*.05,w*.18,0,-h*.05,w*.78);rg.addColorStop(0,"rgba(0,0,0,0)");rg.addColorStop(1,"rgba(0,0,0,"+(0.26*dk).toFixed(2)+")");cx.fillStyle=rg;cx.fillRect(-w/2,-h/2,w,h);
   /* 根もと（キューティクル側）の影 */
-  var cg=cx.createLinearGradient(0,h/2,0,h*.18);cg.addColorStop(0,"rgba(0,0,0,.28)");cg.addColorStop(1,"rgba(0,0,0,0)");cx.fillStyle=cg;cx.fillRect(-w/2,h*.18,w,h*.34);
+  var cg=cx.createLinearGradient(0,h/2,0,h*.18);cg.addColorStop(0,"rgba(0,0,0,"+(0.26*dk).toFixed(2)+")");cg.addColorStop(1,"rgba(0,0,0,0)");cx.fillStyle=cg;cx.fillRect(-w/2,h*.18,w,h*.34);
   /* ツヤ：左上の大きな反射と、細い筋 */
-  var gl=cx.createLinearGradient(-w/2,-h/2,w*.1,h*.15);gl.addColorStop(0,"rgba(255,255,255,.85)");gl.addColorStop(1,"rgba(255,255,255,0)");
+  var gl=cx.createLinearGradient(-w/2,-h/2,w*.1,h*.15);gl.addColorStop(0,"rgba(255,255,255,.55)");gl.addColorStop(1,"rgba(255,255,255,0)");
   cx.fillStyle=gl;cx.beginPath();cx.ellipse(-w*.18,-h*.2,w*.2,h*.26,-.12,0,6.3);cx.fill();
   cx.fillStyle="rgba(255,255,255,.55)";cx.fillRect(w*.24,-h*.32,w*.07,h*.5);
   cx.restore();
   /* ふち取り */
-  rr(cx,-w/2,-h/2,w,h,w*0.48);cx.lineWidth=Math.max(1.5,w*.035);cx.strokeStyle=shade(col,-55);cx.globalAlpha=.7;cx.stroke();cx.globalAlpha=1;
+  rr(cx,-w/2,-h/2,w,h,w*0.48);cx.lineWidth=Math.max(1.5,w*.035);cx.strokeStyle=shade(col,-55);cx.globalAlpha=.32;cx.stroke();cx.globalAlpha=1;
   if(i===S.sel){rr(cx,-w/2-5,-h/2-5,w+10,h+10,w*0.55);cx.setLineDash([9,7]);cx.lineWidth=4;cx.strokeStyle="#ffffff";cx.stroke();cx.lineWidth=1.5;cx.strokeStyle="#222";cx.stroke();cx.setLineDash([]);}
   cx.restore();
 }
@@ -602,7 +603,7 @@ function placeUI(){
 function finishPlace(){
   var t=S.taps,f=t.slice(1),sp=[],i;
   for(i=0;i<3;i++)sp.push(Math.hypot(f[i+1].x-f[i].x,f[i+1].y-f[i].y));
-  var avg=(sp[0]+sp[1]+sp[2])/3,w=Math.max(32,Math.min(130,avg*0.72));
+  var avg=(sp[0]+sp[1]+sp[2])/3,w=Math.max(28,Math.min(110,avg*0.56));
   var dx=f[3].x-f[0].x,dy=f[3].y-f[0].y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;
   if(ny<0){nx=-nx;ny=-ny;}
   var mx=(f[0].x+f[1].x+f[2].x+f[3].x)/4,my=(f[0].y+f[1].y+f[2].y+f[3].y)/4;
