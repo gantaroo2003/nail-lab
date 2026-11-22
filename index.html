@@ -76,18 +76,20 @@ p{margin:6px 0}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .topbar .back{background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:800;color:var(--soft)}
 .hidden{display:none!important}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,122,0,.6)}50%{box-shadow:0 0 0 14px rgba(255,122,0,0)}}
+.pulse{animation:pulse 1.4s infinite}
 ul.l{margin:6px 0;padding-left:1.2em}
 </style>
 </head>
 <body>
-<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.4　11/22 14:00 更新</div>
+<div id="ver" style="background:#3d2b33;color:#fff;font-weight:800;font-size:.85rem;text-align:center;padding:4px 8px;letter-spacing:.04em">版 v1.5　11/22 14:20 更新</div>
 
 <!-- ===== 1. はじめ ===== -->
 <section class="screen active" id="s-start">
   <div class="topbar"><span class="tag">百均ネイル研究所</span><button class="back" id="xlBtn">文字を大きく</button></div>
   <h1>手を、きれいに<br>撮りましょう</h1>
   <p class="lead" style="text-align:center">画面のピンクの手に、自分の手を重ねるだけ。<br>写真は<b>この携帯の中だけ</b>で使います。</p>
-  <div class="card hidden" id="inapp" style="border:3px solid #e9a13b;background:#fff8e8"><b style="font-size:1.15rem">⚠️ このままでは、ピンクの手に合わせて撮れません</b><br>YouTubeの中の画面では、カメラが動かないためです。<br>いまのままでも、赤い「撮る」ボタンで<b>カメラアプリが開いて撮れます</b>。<br>ピンクの手に合わせたいときは、<b>Safariで開き直し</b>てください。<ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>下の「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><b>赤いボタンで画面が真っ黒になる時</b>は、いつもの<b>カメラアプリで手を撮って</b>、「🖼 写真を選ぶ」でその写真を選んでください。<button class="btn big js-copy" style="background:#e9a13b">🔗 ① URLをコピー</button><button class="btn gray js-open">🧭 Safariで直接開く（開かない時は上の手順で）</button></div>
+  <div class="card hidden" id="inapp" style="border:4px solid #e9a13b;background:#fff8e8;padding:14px"><div style="font-size:1.25rem;font-weight:900;text-align:center;line-height:1.4">📣 先に、下のボタンを押してください</div><p style="text-align:center;margin:4px 0 0;font-weight:700">押すと、カメラが使える画面で開き直します</p><button class="btn big js-open pulse" style="background:#ff7a00;font-size:1.7rem;min-height:6rem;margin:10px 0">🧭 押して、開き直す<br><span style="font-size:1rem;font-weight:700">（Safari / Chrome で開きます）</span></button><details><summary style="font-weight:800;padding:8px 0">開かない時は、こちら（3つの手順）</summary><ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><button class="btn gray js-copy">🔗 URLをコピー</button></details><p class="note" style="margin:6px 0 0">このまま進んでも、赤い「撮る」ボタンで携帯のカメラアプリが開いて撮れます。真っ黒になる時は、カメラアプリで撮って「写真を選ぶ」で選んでください。</p></div>
   <div class="card">
     <b>どちらの手？</b>
     <div class="row hand-choice" style="margin-top:8px">
@@ -110,7 +112,7 @@ ul.l{margin:6px 0;padding-left:1.2em}
 <!-- ===== 2. 撮影 ===== -->
 <section class="screen" id="s-shoot">
   <div class="topbar"><button class="back" id="shootBack">← もどる</button><span class="tag" id="shootTag">左手</span></div>
-  <div class="card hidden" id="inapp2" style="border:3px solid #e9a13b;background:#fff8e8"><b style="font-size:1.15rem">⚠️ このままでは、ピンクの手に合わせて撮れません</b><br>YouTubeの中の画面では、カメラが動かないためです。<br>いまのままでも、赤い「撮る」ボタンで<b>カメラアプリが開いて撮れます</b>。<br>ピンクの手に合わせたいときは、<b>Safariで開き直し</b>てください。<ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>下の「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><b>赤いボタンで画面が真っ黒になる時</b>は、いつもの<b>カメラアプリで手を撮って</b>、「🖼 写真を選ぶ」でその写真を選んでください。<button class="btn big js-copy" style="background:#e9a13b">🔗 ① URLをコピー</button><button class="btn gray js-open">🧭 Safariで直接開く（開かない時は上の手順で）</button></div>
+  <div class="card hidden" id="inapp2" style="border:4px solid #e9a13b;background:#fff8e8;padding:14px"><div style="font-size:1.25rem;font-weight:900;text-align:center;line-height:1.4">📣 先に、下のボタンを押してください</div><p style="text-align:center;margin:4px 0 0;font-weight:700">押すと、カメラが使える画面で開き直します</p><button class="btn big js-open pulse" style="background:#ff7a00;font-size:1.7rem;min-height:6rem;margin:10px 0">🧭 押して、開き直す<br><span style="font-size:1rem;font-weight:700">（Safari / Chrome で開きます）</span></button><details><summary style="font-weight:800;padding:8px 0">開かない時は、こちら（3つの手順）</summary><ol style="margin:8px 0;padding-left:1.4em;font-size:1.05rem;font-weight:700"><li>「URLをコピー」を押す</li><li>ホーム画面の<b>Safari</b>（青いコンパス）を開く</li><li>上のアドレス欄を長押し →「貼り付けて移動」</li></ol><button class="btn gray js-copy">🔗 URLをコピー</button></details><p class="note" style="margin:6px 0 0">このまま進んでも、赤い「撮る」ボタンで携帯のカメラアプリが開いて撮れます。真っ黒になる時は、カメラアプリで撮って「写真を選ぶ」で選んでください。</p></div>
   <div class="steps" id="steps"></div>
   <h2 id="shootTitle">1枚目：真上・手全体</h2>
   <p id="shootDesc" class="lead"></p>
