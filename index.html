@@ -1,6 +1,127 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>百均ネイル研究所 ― 準備中</title>
-<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fffaf8;color:#3d2b33;font-family:"Hiragino Maru Gothic ProN","Yu Gothic UI",system-ui,sans-serif;text-align:center;padding:24px}
-h1{font-size:1.6rem;margin:.4em 0}p{font-size:1.1rem;line-height:1.8;color:#7a5f6b}.tag{display:inline-block;background:#ff6b9d;color:#fff;border-radius:999px;padding:4px 18px;font-weight:800}</style></head>
-<body><div><span class="tag">百均ネイル研究所</span><h1>ただいま、準備中です</h1><p>もっと見やすく、きれいなアプリにするために、作り直しています。<br>もうしばらくお待ちください。</p></div></body></html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ff6b9d">
+<title>百均ネイル研究所 ― 映えネイルの教科書</title>
+<style>
+:root{--bg:#fffaf8;--ink:#3d2b33;--soft:#7a5f6b;--line:#f3dde2;--pink:#ff6b9d;--deep:#e84e83;--pinksoft:#ffe3ec;--mint:#3ec6a7;--shadow:0 6px 20px rgba(232,78,131,.14)}
+*{box-sizing:border-box}
+html{font-size:18px;-webkit-text-size-adjust:100%}
+html.xl{font-size:21px}
+html,body{margin:0;min-height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",system-ui,sans-serif;line-height:1.65}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:680px;margin:0 auto;padding:12px 14px calc(90px + env(safe-area-inset-bottom))}
+.ver{background:#3d2b33;color:#fff;font-weight:800;font-size:.8rem;text-align:center;padding:3px 8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tag{display:inline-block;background:var(--pink);color:#fff;border-radius:999px;padding:3px 16px;font-weight:800;font-size:.95rem}
+.sm{border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:800;color:var(--soft)}
+h1{font-size:1.65rem;line-height:1.35;margin:10px 0 4px;text-align:center}
+.lead{text-align:center;color:var(--soft);margin:0 0 12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0 14px}
+.chips button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;font-weight:800;color:var(--soft)}
+.chips button[aria-pressed=true]{background:var(--pink);border-color:var(--pink);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border:2px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);text-align:left;padding:0;display:block;width:100%}
+.card .ph{aspect-ratio:3/2;background:#f6ece8;position:relative;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .sw{display:flex;height:100%;align-items:flex-end;justify-content:center;gap:6px;padding-bottom:10px}
+.card .sw i{width:20px;height:30px;border-radius:10px 10px 7px 7px;border:1px solid rgba(0,0,0,.12);display:block}
+.card .soon{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:1px 10px;font-size:.7rem;font-weight:800}
+.card .nm{padding:8px 10px 10px;font-weight:800;font-size:.95rem;line-height:1.35}
+.card .nm small{display:block;color:var(--soft);font-weight:700;font-size:.78rem;margin-top:2px}
+.back{border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 18px;font-weight:800;color:var(--soft);margin:4px 0 8px}
+.photo{position:relative;border-radius:18px;overflow:hidden;background:#f6ece8;aspect-ratio:3/2;box-shadow:var(--shadow)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .none{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--soft);font-weight:800;gap:10px}
+.photo .none .dots{display:flex;gap:8px}.photo .none i{width:28px;height:42px;border-radius:14px 14px 10px 10px;border:1px solid rgba(0,0,0,.12);display:block}
+.tabs{display:flex;gap:8px;margin:10px 0}
+.tabs button{flex:1;border:2px solid var(--line);background:#fff;border-radius:14px;padding:10px;font-weight:800;color:var(--soft);font-size:1rem}
+.tabs button[aria-pressed=true]{border-color:var(--pink);background:var(--pinksoft);color:var(--deep)}
+h2{font-size:1.4rem;margin:14px 0 2px;line-height:1.35}
+.meta{color:var(--soft);font-weight:700;font-size:.92rem}
+.box{background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin:12px 0}
+.box h3{margin:0 0 6px;font-size:1.1rem;color:var(--deep)}
+.box ul{list-style:none;margin:0;padding:0}
+.box li{padding:7px 0;border-bottom:1px solid var(--line)}
+.box li:last-child{border-bottom:0}
+.box label{display:flex;gap:10px;align-items:flex-start;font-weight:700}
+.box input{width:24px;height:24px;margin-top:3px;accent-color:var(--pink);flex:none}
+.box .k{display:inline-block;background:var(--pinksoft);color:var(--deep);border-radius:8px;padding:0 8px;font-size:.8rem;font-weight:800;margin-right:6px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="ver" id="ver">版 v3.0　11/22</div>
+<div class="wrap">
+
+<section id="home">
+  <div class="top"><span class="tag">百均ネイル研究所</span><button class="sm" id="xl">文字を大きく</button></div>
+  <h1>映えネイルを、<br>百均で作ろう</h1>
+  <p class="lead">好きなデザインを選ぶと、<b>見本の写真</b>と<br><b>使うもの・やり方</b>が見られます。</p>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="detail" class="hidden">
+  <button class="back" id="back">← デザイン一覧へ</button>
+  <div class="photo" id="photo"></div>
+  <div class="tabs" id="tabs"></div>
+  <h2 id="dname"></h2>
+  <div class="meta" id="dmeta"></div>
+  <p id="ddesc"></p>
+  <div class="box"><h3>🛒 使うもの（百均で買うもの）</h3><ul id="items"></ul></div>
+  <div class="box"><h3>💅 やり方</h3><p id="dart" style="margin:0"></p></div>
+  <button class="back" id="back2">← デザイン一覧へ</button>
+</section>
+
+</div>
+<script>
+var DESIGNS=[{"id":"syruppink","name":"シロップピンク ジェリー","world":"韓シロップ","colorFam":"スキンカラー","texture":"ジェリー","pattern":"柄なし","season":"通年","difficulty":"入門","colors":["#f6c9cd","#f4bcc4","#f6c9cd","#f2b3bc","#f6c9cd"],"desc":"韓国ネイルの王道、透け感ピンクのシロップカラー。素の爪がほんのり透けるので、失敗しても目立ちにくい入門デザイン。まずは写真で「着けた感じ」を見てみて。","art":"透けピンクを薄く2〜3度塗りして、色の濃さを少しずつ重ねます。1回ごとにしっかり乾かすとムラなくちゅるんと仕上がります。","items":{"base":["ピールオフベース（剥がせるタイプ）","ベースコート"],"color":["カラージェル／ポリッシュ（透けピンク系）"],"parts":[],"tools":["綿棒"],"care":["ネイルオイル"]}},{"id":"milkwhite","name":"ミルクホワイト ワンカラー","world":"韓シロップ","colorFam":"スキンカラー","texture":"ジェリー","pattern":"柄なし","season":"通年","difficulty":"入門","colors":["#f7f2ec","#f4efe8","#f7f2ec","#f4efe8","#f7f2ec"],"desc":"真っ白すぎない、ミルクを混ぜたような柔らかい白のワンカラー。清潔感があって、どんな服にも合う万能デザイン。写真だと白の柔らかさがよく分かります。","art":"白系はムラになりやすいので、薄く3回に分けて塗るのがコツ。刷毛の跡が残ったら、乾く前に刷毛を寝かせて表面をそっとなでます。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ミルクホワイト系）"],"parts":[],"tools":["綿棒"],"care":["ネイルオイル","除光液（修正用）"]}},{"id":"skinbeige","name":"スキンベージュ ワンカラー","world":"欧ミニマル","colorFam":"スキンカラー","texture":"ジェリー","pattern":"柄なし","season":"通年","difficulty":"入門","colors":["#d9bda6","#d3b198","#d9bda6","#cdaa8d","#d9bda6"],"desc":"肌になじむベージュのワンカラー。指が長くすっきり見えて、お仕事や学校でも浮かない大人の定番。自分の肌色に近い色を選ぶのがポイントです。","art":"ベージュは薄く2度塗り。肌より少しだけ明るい色を選ぶと、手元がぱっと華やぎます。根元を1mm空けて塗ると伸びても目立ちません。","items":{"base":["ピールオフベース（剥がせるタイプ）","ベースコート"],"color":["カラージェル／ポリッシュ（ベージュ系）"],"parts":[],"tools":["綿棒"],"care":["ネイルオイル"]}},{"id":"gingham","name":"ピンクギンガム チェック","world":"韓シロップ","colorFam":"スキンカラー","texture":"ジェリー","pattern":"チェック","season":"春","difficulty":"中級","colors":["#fdeef3","#fdeef3","#fdeef3","#fdeef3","#fdeef3"],"desc":"ピンク×白のギンガムチェックを全指に。布みたいな格子柄が春らしくて、写真映えも抜群。線を引く練習になる中級デザインです。","art":"白ベースを塗って完全に乾かしてから、細筆でピンクの縦線2本・横線2本を等間隔に引きます。線が交わる所が自然に濃くなるのがギンガムらしさ。先に薬指だけで練習すると安心。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ホワイト系）","カラージェル／ポリッシュ（ピンク系）"],"parts":[],"tools":["細筆（ライナーブラシ）"],"care":["ネイルオイル","除光液（修正用）"]}},{"id":"sakura","name":"さくらミルク ニュアンス","world":"和ニュアンス","colorFam":"スキンカラー","texture":"ジェリー","pattern":"柄なし","season":"春","difficulty":"入門","colors":["#f9dcd6","#f6c3cf","#fbeae4","#f3b7c4","#f9dcd6"],"desc":"桜の花びらみたいな淡ピンクを、ミルク色でにじませた和のニュアンス。肌なじみがよく、入学・入園シーズンにも。写真はミルキーベージュのニュアンスで着けた感じです。","art":"カラーを薄く2度塗りし、乾く前に別色を小さく置いて綿棒の先で軽くぼかすと、花びらみたいなにじみになります。","items":{"base":["ピールオフベース（剥がせるタイプ）","ベースコート"],"color":["カラージェル／ポリッシュ（淡ピンク系）","カラージェル／ポリッシュ（ミルクホワイト系）"],"parts":["金箔風フレーク（ほんの少し）"],"tools":["綿棒","つまようじ"],"care":["ネイルオイル","除光液（修正用）"]}},{"id":"syrup","name":"シロップピーチ グラデ","world":"韓シロップ","colorFam":"季節色","texture":"ジェリー","pattern":"ドット","season":"夏","difficulty":"初級","colors":["#ffd9c2","#ffc4a3","#ffb08a","#ff9d70","#ffcfae"],"desc":"韓国ネイルで人気のシロップ質感。透け感のあるピーチを爪先に向かって濃くするグラデーションに、小さなドットを添えて。写真はピンクのグラデーションで着けた感じです。","art":"スポンジに色をのせて爪先からポンポンと叩き、3回に分けて濃くします。最後にドット棒で白い小ドットを3つ置きます。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（透けピーチ系）","カラージェル／ポリッシュ（ホワイト系）"],"parts":[],"tools":["メイクスポンジ","ドット棒（なければつまようじ）"],"care":["ネイルオイル"]}},{"id":"french","name":"パリの朝 フレンチ","world":"欧ミニマル","colorFam":"スキンカラー","texture":"ジェリー","pattern":"柄なし","season":"通年","difficulty":"初級","colors":["#f7e3da","#f7e3da","#f7e3da","#f7e3da","#f7e3da"],"desc":"ヨーロッパ風ミニマルの定番。ヌードベージュに細い白フレンチで、指が長く見える清楚なデザイン。お仕事ネイルにも。","art":"フレンチガイドシールを貼って爪先だけ白く塗り、乾く前にシールをはがすと線がシャープに。細筆で直線を引く方法でもOK。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ヌードベージュ系）","カラージェル／ポリッシュ（ホワイト系）"],"parts":["フレンチガイドシール"],"tools":["細筆（ライナーブラシ）"],"care":["除光液（修正用）","ネイルオイル"]}},{"id":"sunset","name":"LAサンセット クローム","world":"米ゴージャス","colorFam":"季節色","texture":"クローム","pattern":"ギャル系","season":"夏","difficulty":"中級","colors":["#ffb37a","#ff8f6b","#f76d8a","#e85d9e","#ffb37a"],"desc":"夕焼け色の上にクロームパウダーを重ねた、アメリカ西海岸みたいなゴージャス仕様。光で色が変わって見えます。","art":"カラーを塗って半乾きのタイミングでクロームパウダーをチップでこすりつけます。全面ではなく爪先側だけにすると夕焼けグラデに。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（オレンジ系）","カラージェル／ポリッシュ（ピンク系）"],"parts":["クロームパウダー（ミラーパウダー）","アイシャドウチップ"],"tools":["シリコンブラシ"],"care":["ネイルオイル"]}},{"id":"matcha","name":"抹茶ラテ チェック","world":"和ニュアンス","colorFam":"アース","texture":"ジェリー","pattern":"チェック","season":"秋","difficulty":"中級","colors":["#dfe5cf","#b9c49a","#e9e2cf","#a7b78b","#dfe5cf"],"desc":"抹茶とミルクの2色で作る、ほっこり和チェック。アースカラーで秋の装いにも合わせやすい落ち着きデザイン。","art":"ベース色を塗って乾かしてから、細筆で縦線2本・横線2本を引くだけ。線は一気に引かず、短く継ぎ足すとブレません。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（抹茶グリーン系）","カラージェル／ポリッシュ（ミルク系）","カラージェル／ポリッシュ（ブラウン系・線用）"],"parts":[],"tools":["細筆（ライナーブラシ）"],"care":["ネイルオイル"]}},{"id":"mintdot","name":"ミント ドットポップ","world":"韓シロップ","colorFam":"季節色","texture":"ジェリー","pattern":"ドット","season":"夏","difficulty":"入門","colors":["#cdf2e4","#b5ead6","#cdf2e4","#b5ead6","#cdf2e4"],"desc":"爽やかミントに白ドットを散らした、失敗しにくい入門デザイン。ドットはつまようじでも描けます。","art":"ドット棒（なければつまようじの丸い方）に白を付け、爪の根元側に大きめ、爪先側に小さめと大きさを変えて置くとリズムが出ます。","items":{"base":["ピールオフベース（剥がせるタイプ）"],"color":["カラージェル／ポリッシュ（ミント系）","カラージェル／ポリッシュ（ホワイト系）"],"parts":[],"tools":["ドット棒（なければつまようじ）"],"care":["ネイルオイル"]}},{"id":"magnet","name":"テラコッタ マグネット","world":"欧ミニマル","colorFam":"アース","texture":"マグネット","pattern":"柄なし","season":"秋","difficulty":"中級","colors":["#c96f4a","#bd6240","#c96f4a","#bd6240","#c96f4a"],"desc":"磁石で光の筋を寄せるマグネットネイルを、大人っぽいテラコッタで。動くたびに光が流れて高見えします。","art":"マグネットジェルを塗ったら乾かす前に磁石を爪の上にかざし、光の筋を中央に寄せます。磁石は近づけすぎず、5秒キープが目安。","items":{"base":["ベースコート"],"color":["マグネットジェル（テラコッタ系）"],"parts":["ネイル用マグネット（磁石スティック）"],"tools":[],"care":["ネイルオイル"]}},{"id":"leopard","name":"ピンクヒョウ ギャル","world":"米ゴージャス","colorFam":"スキンカラー","texture":"ジェリー","pattern":"ヒョウ柄","season":"通年","difficulty":"上級","colors":["#ffd3e2","#ffc2d6","#ffd3e2","#ffc2d6","#ffd3e2"],"desc":"ヒョウ柄の地色をピンクに変えたギャル系デザイン。斑点は「丸を描いて縁を黒で囲む」だけですが、筆のコントロールが要る上級編。","art":"まずピンクの上に濃いピンクで不揃いの丸を5〜6個。その縁を黒の細筆で「C」の字を描くように囲みます。全部囲まず、2〜3か所空けると本物っぽく。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ピンク系）","カラージェル／ポリッシュ（濃ピンク系）","カラージェル／ポリッシュ（ブラック系）"],"parts":[],"tools":["細筆（ライナーブラシ）","ドット棒"],"care":["除光液（修正用）","ネイルオイル"]}},{"id":"snow","name":"雪の結晶 ホワイト","world":"和ニュアンス","colorFam":"スキンカラー","texture":"クローム","pattern":"柄なし","season":"クリスマス","difficulty":"初級","colors":["#fdfdfd","#f2f5f9","#fdfdfd","#eef3f8","#fdfdfd"],"desc":"真っ白なベースに雪の結晶シールと、ほんのりパールクローム。冬の行事に映える清楚なデザインです。","art":"白を2度塗りして結晶シールを貼り、上からクロームパウダーをごく薄く。シールの段差はトップを少し厚めに塗ると消えます。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ホワイト系）"],"parts":["ネイルシール（雪・星モチーフ）","クロームパウダー（パール系）"],"tools":["ピンセット"],"care":["ネイルオイル"]}},{"id":"halloween","name":"ハロウィン チェック＆マグネット","world":"米ゴージャス","colorFam":"季節色","texture":"マグネット","pattern":"チェック","season":"ハロウィン","difficulty":"中級","colors":["#f59a4e","#8a5aa8","#f59a4e","#3d2b45","#8a5aa8"],"desc":"オレンジ×パープルのハロウィンカラー。薬指だけチェック柄にして、イベント感と普段使いのバランスを取りました。","art":"薬指だけベース色の上に細筆でチェック線を引き、他の指はマグネットで光の筋を寄せます。色数を2色に絞るとまとまります。","items":{"base":["ベースコート"],"color":["マグネットジェル（パープル系）","カラージェル／ポリッシュ（オレンジ系）","カラージェル／ポリッシュ（ブラック系・線用）"],"parts":["ネイル用マグネット（磁石スティック）"],"tools":["細筆（ライナーブラシ）"],"care":["ネイルオイル"]}},{"id":"gradsea","name":"海辺のミント グラデ","world":"韓シロップ","colorFam":"季節色","texture":"ジェリー","pattern":"柄なし","season":"夏","difficulty":"初級","colors":["#d8f4ec","#bdeadd","#9adcc8","#7ccbb2","#a9e6d4"],"desc":"浅瀬から沖へ変わる海の色をスポンジグラデで。夏の旅行や浴衣にも合う、涼しげなデザインです。","art":"スポンジに3色を横並びに塗って爪にポンポン。色の境目はスポンジを少しずらして2回叩くと自然にぼけます。","items":{"base":["ピールオフベース（剥がせるタイプ）"],"color":["カラージェル／ポリッシュ（ミント系）","カラージェル／ポリッシュ（アクア系）","カラージェル／ポリッシュ（ホワイト系）"],"parts":["シェル風フレーク（あれば）"],"tools":["メイクスポンジ"],"care":["ネイルオイル"]}},{"id":"bordeaux","name":"大人のボルドー 3Dリボン","world":"欧ミニマル","colorFam":"アース","texture":"クローム","pattern":"ギャル系","season":"冬","difficulty":"上級","colors":["#8e3b46","#7e3340","#8e3b46","#7e3340","#8e3b46"],"desc":"深いボルドーに立体リボンパーツをのせた、大人のゴージャス。3Dパーツ作りがある上級デザインです。","art":"リボンは粘土状ジェルを小さく丸めて2つ作り、中央を細筆で押してくびれを作ります。のせる前に仮置きして位置を決めるのが大事。","items":{"base":["ベースコート"],"color":["カラージェル／ポリッシュ（ボルドー系）"],"parts":["3D用粘土ジェル（クレイジェル）","ラインストーン（小）"],"tools":["細筆（ライナーブラシ）","シリコンブラシ","ピンセット"],"care":["ネイルオイル","除光液（修正用）"]}},{"id":"winered","name":"ワインレッド マグネット","world":"欧ミニマル","colorFam":"季節色","texture":"マグネット","pattern":"柄なし","season":"冬","difficulty":"中級","colors":["#7d1f2d","#8e2434","#6d1a26","#932c3a","#7d1f2d"],"desc":"深いワインレッドに、磁石で寄せた光の筋が流れるマグネットネイル。大人の手元に映える、写真映え抜群のデザインです。詳細では「手のパターン」写真でも確認できます。","art":"マグネットジェルを塗ったら乾かす前に磁石を爪の上にかざし、光の筋をななめに寄せます。筋の向きを全部の指でそろえると、写真で見たときの統一感が出ます。","items":{"base":["ベースコート"],"color":["マグネットジェル（ワインレッド系）"],"parts":["ネイル用マグネット（磁石スティック）"],"tools":[],"care":["ネイルオイル"]}}];
+var PHOTOS={"10":{"a":"p10a.jpg","b":"p10b.jpg"},"11":{"a":"p11a.jpg","b":"p11b.jpg"},"12":{"a":"p12a.jpg","b":"p12b.jpg"},"13":{"a":"p13a.jpg","b":"p13b.jpg"},"14":{"a":"p14a.jpg","b":"p14b.jpg"},"15":{"b":"p15b.jpg","a":"p15a.jpg"},"16":{"a":"p16a.jpg","b":"p16b.jpg"},"17":{"a":"p17a.jpg","b":"p17b.jpg"},"01":{"b":"p01b.jpg","a":"p01a.jpg"},"07":{"a":"p07a.jpg","b":"p07b.jpg"},"09":{"a":"p09a.jpg","b":"p09b.jpg"},"02":{"a":"p02a.jpg","b":"p02b.jpg"},"08":{"b":"p08b.jpg","a":"p08a.jpg"},"03":{"b":"p03b.jpg","a":"p03a.jpg"},"04":{"a":"p04a.jpg","b":"p04b.jpg"},"05":{"a":"p05a.jpg","b":"p05b.jpg"},"06":{"a":"p06a.jpg","b":"p06b.jpg"}};
+var TEX="すべて",CUR=0,SIDE="a";
+function $(i){return document.getElementById(i);}
+function pad(n){return (n<10?"0":"")+n;}
+function photoOf(i,side){var p=PHOTOS[pad(i+1)];return p&&p[side]?p[side]:null;}
+function dots(d){return d.colors.map(function(c){return '<i style="background:'+c+'"></i>';}).join("");}
+$("xl").onclick=function(){var x=document.documentElement.classList.toggle("xl");this.textContent=x?"文字をふつうに":"文字を大きく";};
+
+function renderHome(){
+  var texs=["すべて"];DESIGNS.forEach(function(d){if(texs.indexOf(d.texture)<0)texs.push(d.texture);});
+  $("chips").innerHTML=texs.map(function(t){return '<button aria-pressed="'+(t===TEX)+'" data-t="'+t+'">'+t+'</button>';}).join("");
+  var cb=$("chips").querySelectorAll("button");for(var k=0;k<cb.length;k++)cb[k].onclick=function(){TEX=this.getAttribute("data-t");renderHome();};
+  var h="";
+  DESIGNS.forEach(function(d,i){
+    if(TEX!=="すべて"&&d.texture!==TEX)return;
+    var p=photoOf(i,"a");
+    h+='<button class="card" data-i="'+i+'"><div class="ph">'+(p?'<img src="'+p+'" alt="'+d.name+'の見本写真" loading="lazy">':'<div class="sw">'+dots(d)+'</div><span class="soon">写真準備中</span>')+'</div><div class="nm">'+d.name+'<small>'+d.texture+' ・ 難易度：'+d.difficulty+'</small></div></button>';
+  });
+  $("grid").innerHTML=h;
+  var cs=$("grid").querySelectorAll(".card");for(var j=0;j<cs.length;j++)cs[j].onclick=function(){openDetail(+this.getAttribute("data-i"));};
+}
+function show(id){$("home").classList.toggle("hidden",id!=="home");$("detail").classList.toggle("hidden",id!=="detail");window.scrollTo(0,0);}
+function setSide(s){
+  SIDE=s;var d=DESIGNS[CUR],p=photoOf(CUR,s);
+  $("photo").innerHTML=p?'<img src="'+p+'" alt="'+d.name+'の見本写真">':'<div class="none"><div class="dots">'+dots(d)+'</div><div>見本写真は、準備中です</div></div>';
+  var has=photoOf(CUR,"a")&&photoOf(CUR,"b");
+  $("tabs").classList.toggle("hidden",!has);
+  $("tabs").innerHTML='<button data-s="a" aria-pressed="'+(s==="a")+'">真上から</button><button data-s="b" aria-pressed="'+(s==="b")+'">ななめから</button>';
+  var tb=$("tabs").querySelectorAll("button");for(var k=0;k<tb.length;k++)tb[k].onclick=function(){setSide(this.getAttribute("data-s"));};
+}
+function openDetail(i){
+  CUR=i;var d=DESIGNS[i];
+  $("dname").textContent=d.name;
+  $("dmeta").textContent=d.world+" ・ "+d.texture+" ・ "+d.pattern+" ・ 難易度："+d.difficulty;
+  $("ddesc").textContent=d.desc.replace(/詳細では[^。]*。?/,"");$("dart").textContent=d.art;
+  var it=d.items||{},rows=[["下地",it.base],["色",it.color],["パーツ",it.parts],["道具",it.tools],["ケア",it.care]],h="";
+  rows.forEach(function(r){(r[1]||[]).forEach(function(x){h+='<li><label><input type="checkbox"><span><span class="k">'+r[0]+'</span>'+x+'</span></label></li>';});});
+  $("items").innerHTML=h||'<li>特別なものは要りません</li>';
+  setSide("a");show("detail");
+}
+$("back").onclick=$("back2").onclick=function(){show("home");};
+renderHome();
+</script>
+</body>
+</html>
